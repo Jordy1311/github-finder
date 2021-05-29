@@ -32,6 +32,30 @@ class UI {
         `;
     }
 
+    // display repos in UI
+    showRepos(repos) {
+        let output = "";
+        repos.forEach(repo => {
+            output += `
+                <div class="card card-body mb-2">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <a href="${repo.html_url}" target="_blank">${repo.name}</a>
+                        </div>
+                        <div class="col-md-6">
+                            <span class="badge badge-pill badge-primary">Starts: ${repo.stargazers_count}</span>
+                            <span class="badge badge-pill badge-secondary">Watchers: ${repo.watchers_count}</span>
+                            <span class="badge badge-pill badge-success">Forks: ${repo.forks_count}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+
+        // output repos
+        document.getElementById("repos").innerHTML = output;
+    }
+
     // show alert message in UI
     showAlert(message, className) {
         // clear any remaining alerts
@@ -49,10 +73,10 @@ class UI {
         // insert alert
         container.appendChild(div);
 
-        // timeout after 2 seconds
+        // timeout after 3 seconds
         setTimeout(() => {
             this.clearAlert();
-        }, 2000);
+        }, 3000);
     }
 
     // clear alert message
